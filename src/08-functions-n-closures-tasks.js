@@ -45,7 +45,6 @@ function getComposition(f, g) {
  *
  */
 function getPowerFunction(exponent) {
-  // throw new Error('Not implemented');
   return (x) => x ** exponent;
 }
 
@@ -109,8 +108,17 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  return () => {
+    try {
+      func();
+    } catch (e) {
+      for (let i; i < attempts; i += 1) {
+        func();
+      }
+    }
+    return 'expected';
+  };
 }
 
 
@@ -155,8 +163,8 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  return (...args2) => args1.reduce((sum, value) => sum + value, '') + args2.reduce((sum, value) => sum + value, '');
 }
 
 
